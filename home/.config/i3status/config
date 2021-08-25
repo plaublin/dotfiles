@@ -1,0 +1,71 @@
+general {
+        output_format = "i3bar"
+        colors = true
+        interval = 5
+}
+
+#order += "path_exists VPN"
+#order += "wireless wlan0"
+#order += "ethernet eth0"
+#order += "cpu_temperature 0"
+#order += "memory"
+#order += "load"
+order += "battery 0"
+order += "volume master" 
+order += "tztime local"
+
+wireless wlan0 {
+        #format_up = "W: (%quality at %essid, %bitrate) %ip"
+        format_up = "W: %ip (%bitrate)"
+        format_down = "W: down"
+}
+
+ethernet eth0 {
+        format_up = "E: %ip (%speed)"
+        #format_down = "E: down"
+        format_down = ""
+}
+
+battery 0 {
+        #format = "%status %percentage %remaining %emptytime"
+        format = "%status %percentage %remaining"
+        format_down = "No battery"
+        status_chr = "⚡" # CHR
+        status_bat = "🔋" # BAT
+        status_unk = "?"  # UNK
+        status_full = "☻" # FULL
+        path = "/sys/class/power_supply/BAT%d/uevent"
+        low_threshold = 10
+		  integer_battery_capacity = true
+}
+
+path_exists VPN {
+        # path exists when a VPN tunnel launched by nmcli/nm-applet is active
+        path = "/proc/sys/net/ipv4/conf/tun0"
+}
+
+tztime local {
+        format = "%Y-%m-%d %H:%M %Z"
+        #hide_if_equals_localtime = true
+}
+
+load {
+        format = "💻 %5min"
+}
+
+cpu_temperature 0 {
+        format = "T: %degrees °C"
+        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input"
+}
+
+memory {
+        format = "%used"
+        threshold_degraded = "10%"
+        format_degraded = "MEMORY: %free"
+}
+
+volume master {
+        format = "♪: %volume"
+        format_muted = "♪: x"
+        device = "pulse"
+}
