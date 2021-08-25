@@ -182,7 +182,7 @@ exec --no-startup-id "fcitx5 -d"
 bindsym XF86PowerOff exec --no-startup-id ~/scripts/power.sh
 
 # check the battery status and displays a message if too low
-exec --no-startup-id "~/scripts/check_battery.sh"
+exec_always --no-startup-id "~/scripts/check_battery.sh"
 
 # wallpaper
 # already done in .xinitrc

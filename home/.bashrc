@@ -160,3 +160,5 @@ export GIT_PS1_SHOWUPSTREAM=auto
 
 # japanese in kitty
 #export GLFW_IM_MODULE=ibus
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash
