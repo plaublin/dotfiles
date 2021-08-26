@@ -290,8 +290,8 @@ command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, {'source': s:list_cmd(),
   \                               'options': '--tiebreak=index'}, <bang>0)
 
-" Open hotkeys for fzf                                                  
-map <C-p> :Files<CR>                                                            
+" Open hotkeys for fzf
+map <C-p> :Files<CR>
 nmap <leader>; :Buffers<CR>
 
 " rust
