@@ -48,7 +48,7 @@ Plug 'preservim/tagbar'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 " asynchronous linter
-Plug 'dense-analysis/ale'
+"Plug 'dense-analysis/ale'
 
 " Collection of common configurations for the Nvim LSP client
 Plug 'neovim/nvim-lspconfig'
@@ -175,6 +175,14 @@ set wildmenu
 set wildmode=list:longest
 set wildignore=*~Thumbs.db,*.swp
 
+" highlight extra whitespace
+highlight ExtraWhitespace ctermbg=red guibg=red
+match ExtraWhitespace /\s\+$/
+au BufWinEnter * match ExtraWhitespace /\s\+$/
+au InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
+au InsertLeave * match ExtraWhitespace /\s\+$/
+au BufWinLeave * call clearmatches()
+
 " Show those damn hidden characters
 set listchars=nbsp:¬,eol:¶,extends:»,precedes:«,trail:•
 "set listchars=nbsp:¬,extends:»,precedes:«,trail:•
@@ -230,6 +238,10 @@ nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 vnoremap <C-h> :nohlsearch<cr>
 nnoremap <C-h> :nohlsearch<cr>
 
+" My F1 key is too sensitive
+map <F1> <Esc>
+imap <F1> <Esc>
+
 " Lightline
 set noshowmode
 set cmdheight=1
@@ -265,11 +277,13 @@ command! -bang -nargs=* Rg
   \           : fzf#vim#with_preview('right:50%:hidden', '?'),
   \   <bang>0)
 
-" TODO will not work if proximity-sort is not installed
-" so check if it exists
 function! s:list_cmd()
-  let base = fnamemodify(expand('%'), ':h:.:S')
-  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
+  if executable('proximity-sort')
+	  let base = fnamemodify(expand('%'), ':h:.:S')
+	  return base == '.' ? 'fd --type file --follow' : printf('fd --type file --follow | proximity-sort %s', shellescape(expand('%')))
+  else
+	  return 'fd --type file --follow'
+  endif
 endfunction
 
 command! -bang -nargs=? -complete=dir Files
@@ -298,7 +312,7 @@ local nvim_lsp = require'lspconfig'
 
 -- function to attach completion when setting up lsp
 local on_attach = function(client)
-    require'completion'.on_attach(client)
+	require'completion'.on_attach(client)
 end
 
 -- Enable rust_analyzer
@@ -325,3 +339,4 @@ nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
 nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
 nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
 nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
