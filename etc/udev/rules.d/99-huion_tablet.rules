@@ -1,0 +1,1 @@
+ACTION=="add", ATTRS{idProduct}=="006d", ATTRS{idVendor}=="256c", ENV{DISPLAY}=":0", RUN+="/usr/bin/systemctl start hotplug_huion_tablet.service"

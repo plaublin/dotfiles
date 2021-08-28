@@ -1,0 +1,11 @@
+[Unit]
+Description=Huion tablet hotplug
+
+[Service]
+Type=simple
+RemainAfterExit=no
+User=pl
+ExecStart=/usr/local/bin/systemd_set_huion_keys.sh
+
+[Install]
+WantedBy=multi-user.target
