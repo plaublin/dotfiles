@@ -7,7 +7,7 @@ general {
 #order += "path_exists VPN"
 #order += "wireless wlan0"
 #order += "ethernet eth0"
-#order += "cpu_temperature 0"
+order += "cpu_temperature 0"
 #order += "memory"
 #order += "load"
 order += "battery 0"
@@ -54,8 +54,9 @@ load {
 }
 
 cpu_temperature 0 {
-        format = "T: %degrees °C"
-        path = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input"
+	format = "T: %degrees °C"
+	#path = "/sys/devices/platform/coretemp.0/hwmon/hwmon7/temp1_input"
+	path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input"
 }
 
 memory {
