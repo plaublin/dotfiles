@@ -18,6 +18,9 @@ Plug 'itchyny/lightline.vim'
 " make the yanked region apparent
 Plug 'machakann/vim-highlightedyank'
 
+" base16 colour theme
+Plug 'chriskempson/base16-vim'
+
 " change the working directory to the project root when opening a file
 Plug 'airblade/vim-rooter'
 
@@ -95,6 +98,11 @@ endif
 
 " colors
 set background=dark
+set termguicolors
+"colorscheme murphy
+"hi Comment term=bold   ctermfg=DarkGreen guifg=Orange
+let base16colorspace=256
+colorscheme base16-tomorrow-night
 
 set backup			" keep a backup file (*~ file)
 set history=50		" keep 50 lines of command line history
