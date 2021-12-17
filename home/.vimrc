@@ -22,7 +22,7 @@ Plug 'machakann/vim-highlightedyank'
 Plug 'chriskempson/base16-vim'
 
 " change the working directory to the project root when opening a file
-Plug 'airblade/vim-rooter'
+"Plug 'airblade/vim-rooter'
 
 " vim syntax for toml
 Plug 'cespare/vim-toml'

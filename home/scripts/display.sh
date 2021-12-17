@@ -14,7 +14,7 @@ INTERNAL_DISPLAY="eDP1"
 EXTERNAL_DISPLAY=""
 
 # choices will be displayed in dmenu
-choices="laptop\ndual\nexternal\nclone"
+choices="laptop\ndual\nexternal\nclone\nauto"
 
 # Your choice in dmenu will determine what xrandr command to run
 #chosen=$(echo -e $choices | dmenu -i)
@@ -46,6 +46,8 @@ case "$chosen" in
     clone) xrandr --output $INTERNAL_DISPLAY --auto --output $EXTERNAL_DISPLAY --auto --same-as $INTERNAL_DISPLAY ;;
 
     dual) xrandr --output $INTERNAL_DISPLAY --auto --primary --output $EXTERNAL_DISPLAY --auto --right-of $INTERNAL_DISPLAY ;;
+
+    auto) xrandr --auto ;;
 
 esac
 

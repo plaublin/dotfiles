@@ -161,11 +161,7 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
     [ -s "$BASE16_SHELL/profile_helper.sh" ] && \
         eval "$("$BASE16_SHELL/profile_helper.sh")"
 
-# kitty completion
-#source <(kitty + complete setup bash)
-
-# japanese in kitty
-#export GLFW_IM_MODULE=ibus
-
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
 
+# for pip
+export PATH=$PATH:$HOME/.local/bin
