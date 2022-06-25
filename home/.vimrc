@@ -59,9 +59,6 @@ Plug 'neovim/nvim-lspconfig'
 " Extensions to built-in LSP, for example, providing type inlay hints
 Plug 'nvim-lua/lsp_extensions.nvim'
 
-" Autocompletion framework for built-in LSP
-Plug 'nvim-lua/completion-nvim'
-
 call plug#end()
 
 " activate filetypes and syntax highlighting
@@ -80,7 +77,7 @@ set noexpandtab
 
 " delay before o opens a new line
 " http://stackoverflow.com/questions/2158516/delay-before-o-opens-a-new-line
-set timeoutlen=300 
+set timeoutlen=300
 
 " show corresponding parenthesis
 set showmatch
@@ -317,11 +314,6 @@ lua <<EOF
 
 -- nvim_lsp object
 local nvim_lsp = require'lspconfig'
-
--- function to attach completion when setting up lsp
-local on_attach = function(client)
-	require'completion'.on_attach(client)
-end
 
 -- Enable rust_analyzer
 nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
