@@ -71,6 +71,9 @@ Plug 'hrsh7th/vim-vsnip'
 " A plugin to improve your rust experience in neovim.
 Plug 'simrat39/rust-tools.nvim'
 
+" Move seamlessly between vim and tmux splits
+Plug 'christoomey/vim-tmux-navigator'
+
 call plug#end()
 
 " activate filetypes and syntax highlighting

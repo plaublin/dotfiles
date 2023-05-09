@@ -81,7 +81,7 @@ if [ -x /usr/bin/dircolors ]; then
 
     alias grep='grep --color=auto'
     alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
+    alias egrep='grep -E --color=auto'
 fi
 
 # colored GCC warnings and errors
@@ -123,7 +123,12 @@ fi
 if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
-ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/github_rsa  | awk '{print $2}'` || ssh-add ~/.ssh/github_rsa &> /dev/null
+
+if	[ -z "${TMUX}" ]; then
+	ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/github_rsa  | awk '{print $2}'` || ssh-add ~/.ssh/github_rsa &> /dev/null
+else
+	echo "Might have problems with ssh-agent (see .bashrc)"
+fi
 
 function j(){
     jobs | wc -l | egrep -v ^0 | sed -r 's/^([0-9]+)/ (\1)/'
@@ -165,3 +170,9 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 
 # for pip
 export PATH=$PATH:$HOME/.local/bin
+
+# adb
+if [ -d "$HOME/Documents/lineageos_galaxytabs10.5/platform-tools" ]; then
+	export PATH=$PATH:"$HOME/Documents/lineageos_galaxytabs10.5/platform-tools"
+fi
+

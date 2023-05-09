@@ -7,7 +7,7 @@ This should work on Ubunt 20.04.
 # install important stuff
 sudo add-apt-repository ppa:neovim-ppa/unstable
 sudo apt-get update
-sudo apt install fd-find neovim fzf
+sudo apt install fd-find neovim fzf tmux
 curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash -
 sudo apt-get install -y nodejs
 
@@ -17,6 +17,9 @@ ln -s dotfiles/home/.vimrc
 ln -s dotfiles/home/.vim
 mkdir .config
 ln -s ~/dotfiles/home/.config/nvim ~/.config/nvim
+
+# tmux
+ln -s dotfiles/home/.tmux.conf
 
 # update the .bashrc
 cat << 'EOF' >> .bashrc
@@ -80,4 +83,7 @@ https://github.com/jonhoo/proximity-sort
 ## Installation
 
 	1. Clone the repository
+    2. Source bash: `source ~/.bashrc`
 	2. Launch vim and execute `:PlugInstall`
+    3. Clone tpm repository: `git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm`
+    4. Install plugins in tmux: from inside tmux, `prefix + I` (capital i, as in Install)
