@@ -11,7 +11,7 @@ order += "cpu_temperature 0"
 #order += "memory"
 #order += "load"
 order += "battery 0"
-order += "volume master" 
+order += "volume master"
 order += "tztime local"
 
 wireless wlan0 {
@@ -57,8 +57,9 @@ cpu_temperature 0 {
 	format = "T: %degrees °C"
 	# Lenovo X1 carbon gen9
 	#path = "/sys/devices/platform/thinkpad_hwmon/hwmon/hwmon4/temp1_input"
+	path = "/sys/bus/acpi/devices/LNXTHERM:00/thermal_zone/temp"
 	# Lenovo V730
-	path = "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input"
+	#path = "/sys/devices/platform/coretemp.0/hwmon/hwmon6/temp1_input"
 }
 
 memory {

@@ -188,6 +188,8 @@ exec_always --no-startup-id "~/scripts/check_battery.sh"
 # redshift in Tokyo
 exec_always --no-startup-id "redshift-gtk -l 35.62125:139.688014"
 
+# tailscale systray; not started as root, so cannot change the mode from it
+exec_always --no-startup-id "tailscale-systray"
 
 # wallpaper
 # already done in .xinitrc
@@ -211,6 +213,9 @@ bindsym XF86AudioPrev exec playerctl previous
 
 # Make zoom popups ("xxx is now host", etc.) floating
 for_window [title="^zoom$"] floating enable
+
+# Make skype floating
+for_window [title="skype"] floating enable
 
 # take screenshots
 # 3 config file ~/.i3/config
