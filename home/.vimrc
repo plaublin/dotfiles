@@ -4,6 +4,7 @@
 
 set nocompatible
 filetype off
+let mapleader = ";"
 
 " vim-plug
 if has('nvim')
@@ -237,10 +238,17 @@ autocmd BufNewFile,BufRead *.c,*.cc,*.cpp,*.h,*.rs packadd termdebug
 " No arrow keys --- force yourself to use the home row
 nnoremap <up> <nop>
 nnoremap <down> <nop>
+noremap <left> gT
+noremap <right> gt
 inoremap <up> <nop>
 inoremap <down> <nop>
 inoremap <left> <nop>
 inoremap <right> <nop>
+
+" disable ctrl+q
+nnoremap <c-q> <nop>
+inoremap <c-q> <nop>
+noremap <c-q> <nop>
 
 " <leader>, shows/hides hidden characters
 nnoremap <leader>, :set invlist<cr>
@@ -250,9 +258,10 @@ nnoremap <leader>, :set invlist<cr>
 nnoremap <expr> k v:count == 0 ? 'gk' : 'k'
 nnoremap <expr> j v:count == 0 ? 'gj' : 'j'
 
-" Ctrl+h to stop searching
-vnoremap <C-h> :nohlsearch<cr>
-nnoremap <C-h> :nohlsearch<cr>
+" / to search, so:
+" <leader>+/ to stop searching
+vnoremap <leader>/ :nohlsearch<cr>
+nnoremap <leader>/ :nohlsearch<cr>
 
 " My F1 key is too sensitive
 map <F1> <Esc>
@@ -316,7 +325,7 @@ let g:rustfmt_emit_files = 1
 let g:rustfmt_fail_silently = 0
 
 " tagbar
-nmap <F8> :TagbarToggle<CR>
+nmap <leader>t :TagbarToggle<CR>
 
 lua <<EOF
   -- Set up nvim-cmp.
@@ -330,8 +339,8 @@ lua <<EOF
       end,
     },
     window = {
-       completion = cmp.config.window.bordered(),
-       documentation = cmp.config.window.bordered(),
+       -- completion = cmp.config.window.bordered(),
+       -- documentation = cmp.config.window.bordered(),
     },
     mapping = cmp.mapping.preset.insert({
       ['<C-b>'] = cmp.mapping.scroll_docs(-4),
@@ -380,17 +389,47 @@ lua <<EOF
   require('lspconfig')['rust_analyzer'].setup {
     capabilities = capabilities
   }
+  require('lspconfig')['clangd'].setup {
+    capabilities = capabilities
+  }
 EOF
 
-" Code navigation shortcuts
-nnoremap <silent> <c-]> <cmd>lua vim.lsp.buf.definition()<CR>
+" Jumps to the definition of the symbol under the cursor
+nnoremap <c-d> <cmd>lua vim.lsp.buf.definition()<CR>
+
+" Displays hover information about the symbol under the cursor in a floating
+" window. Calling the function twice will jump into the floating window.
 nnoremap <silent> K     <cmd>lua vim.lsp.buf.hover()<CR>
-nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementations()<CR>
-nnoremap <silent> <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
-nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
-nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
-nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
-nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
-nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
-nnoremap <silent> ga    <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" Displays signature information about the symbol under the cursor in a
+" floating window. Need to be inside the function parenthesis
+inoremap <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+nnoremap <c-k> <cmd>lua vim.lsp.buf.signature_help()<CR>
+
+" Selects a code action available at the current cursor position.
+nnoremap <silent> <leader>a    <cmd>lua vim.lsp.buf.code_action()<CR>
+
+" rename
+nnoremap <buffer> <leader>r <cmd>lua vim.lsp.buf.rename()<cr>
+
+" Lists all the implementations for the symbol under the cursor in the
+" quickfix window.
+" nnoremap <silent> gD    <cmd>lua vim.lsp.buf.implementations()<CR>
+
+" Jumps to the definition of the type of the symbol under the cursor.
+" nnoremap <silent> 1gD   <cmd>lua vim.lsp.buf.type_definition()<CR>
+
+" Lists all the references to the symbol under the cursor in the quickfix
+" window.
+" nnoremap <silent> gr    <cmd>lua vim.lsp.buf.references()<CR>
+
+" Lists all symbols in the current buffer in the quickfix window.
+" nnoremap <silent> g0    <cmd>lua vim.lsp.buf.document_symbol()<CR>
+
+" Lists all symbols in the current workspace in the quickfix window.
+" nnoremap <silent> gW    <cmd>lua vim.lsp.buf.workspace_symbol()<CR>
+
+"  Jumps to the declaration of the symbol under the cursor.
+" nnoremap <silent> gd    <cmd>lua vim.lsp.buf.declaration()<CR>
+
 
