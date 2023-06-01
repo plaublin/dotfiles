@@ -76,6 +76,14 @@ https://github.com/sharkdp/fd
 Archlinux: `sudo pacman -S fd`
 Ubuntu: `sudo apt-get install fd-find`, then add an alias: `alias fd=fdfind`
 
+### fzf
+
+If ctrl-r causes `unknown option: --scheme=history`:
+```
+sudo rm /usr/bin/fzf
+sudo ln -s ~/.fzf/bin/fzf /usr/bin/fzf
+```
+
 ### proximity-sort
 
 https://github.com/jonhoo/proximity-sort

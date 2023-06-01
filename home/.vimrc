@@ -19,8 +19,8 @@ Plug 'itchyny/lightline.vim'
 " make the yanked region apparent
 Plug 'machakann/vim-highlightedyank'
 
-" base16 colour theme
-Plug 'chriskempson/base16-vim'
+" melange theme
+Plug 'savq/melange-nvim'
 
 " change the working directory to the project root when opening a file
 "Plug 'airblade/vim-rooter'
@@ -34,6 +34,9 @@ Plug 'rust-lang/rust.vim'
 
 " format C/C++/etc. using clang-format
 Plug 'rhysd/vim-clang-format'
+
+" add inlay hints
+Plug 'lvimuser/lsp-inlayhints.nvim'
 
 " markdown language support
 Plug 'plasticboy/vim-markdown'
@@ -111,10 +114,9 @@ endif
 " colors
 set background=dark
 set termguicolors
-"colorscheme murphy
-"hi Comment term=bold   ctermfg=DarkGreen guifg=Orange
 let base16colorspace=256
-colorscheme base16-tomorrow-night
+
+colorscheme melange
 
 set backup			" keep a backup file (*~ file)
 set history=50		" keep 50 lines of command line history
@@ -395,6 +397,22 @@ lua <<EOF
   require('lspconfig')['clangd'].setup {
     capabilities = capabilities
   }
+
+  -- Set up inlay hints
+  require("lsp-inlayhints").setup()
+  vim.api.nvim_create_augroup("LspAttach_inlayhints", {})
+  vim.api.nvim_create_autocmd("LspAttach", {
+	  group = "LspAttach_inlayhints",
+	  callback = function(args)
+	  if not (args.data and args.data.client_id) then
+		  return
+		  end
+
+		  local bufnr = args.buf
+		  local client = vim.lsp.get_client_by_id(args.data.client_id)
+		  require("lsp-inlayhints").on_attach(client, bufnr)
+		  end,
+  })
 EOF
 
 " Jumps to the definition of the symbol under the cursor
