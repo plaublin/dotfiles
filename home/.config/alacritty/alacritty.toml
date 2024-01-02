@@ -1,0 +1,70 @@
+[[colors.indexed_colors]]
+color = "0xea770d"
+index = 16
+
+[[colors.indexed_colors]]
+color = "0xcd6320"
+index = 17
+
+[[colors.indexed_colors]]
+color = "0x1a1b1c"
+index = 18
+
+[[colors.indexed_colors]]
+color = "0x28292a"
+index = 19
+
+[[colors.indexed_colors]]
+color = "0xa3a5a6"
+index = 20
+
+[[colors.indexed_colors]]
+color = "0xcfd1d2"
+index = 21
+
+[colors.bright]
+black = "0x474849"
+blue = "0x03aeff"
+cyan = "0x42fff9"
+green = "0x06ea61"
+magenta = "0xea5ce2"
+red = "0xb53b50"
+white = "0xdddfe0"
+yellow = "0xc9d364"
+
+[colors.cursor]
+cursor = "0xc1c3c4"
+text = "0x050608"
+
+[colors.normal]
+black = "0x050608"
+blue = "0x03aeff"
+cyan = "0x42fff9"
+green = "0x06ea61"
+magenta = "0xea5ce2"
+red = "0xb53b50"
+white = "0xc1c3c4"
+yellow = "0xc9d364"
+
+[colors.primary]
+background = "0x050608"
+foreground = "0xc1c3c4"
+
+[font]
+size = 10.0
+
+[[keyboard.bindings]]
+action = "Paste"
+key = "V"
+mods = "Alt"
+
+[[keyboard.bindings]]
+action = "Copy"
+key = "C"
+mods = "Alt"
+
+[scrolling]
+history = 1000
+
+[window]
+decorations = "none"
