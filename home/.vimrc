@@ -77,7 +77,15 @@ Plug 'simrat39/rust-tools.nvim'
 " Move seamlessly between vim and tmux splits
 Plug 'christoomey/vim-tmux-navigator'
 
+" helps updating dependencies in Cargo.toml
+Plug 'mhinz/vim-crates'
+
 call plug#end()
+
+
+if has('nvim')
+  autocmd BufRead Cargo.toml call crates#toggle()
+endif
 
 " activate filetypes and syntax highlighting
 filetype plugin indent on
@@ -183,6 +191,15 @@ let g:latex_indent_enabled = 0
 " noinsert: Do not insert text until a selection is made
 " noselect: Do not select, force user to select one from the menu
 set completeopt=menuone,noinsert,noselect
+"set completeopt=menuone,noinsert
+
+"" Complete selected word
+"inoremap <expr> <TAB> pumvisible() ? '<C-y>' : "\<TAB>"
+"" Enter does not select the currently hovered item in the popup menu.
+"" This is to avoid a pre-selected autocompletion to be selected when the
+"" currently entered word is enough and the user wants to enter a new line.
+"inoremap <expr> <CR> pumvisible() ? "<C-o>o" : "<CR>"
+
 
 " Avoid showing extra messages when using completion
 set shortmess+=c

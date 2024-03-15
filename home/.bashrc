@@ -124,11 +124,12 @@ if [[ ! "$SSH_AUTH_SOCK" ]]; then
     source "$XDG_RUNTIME_DIR/ssh-agent.env" >/dev/null
 fi
 
-if	[ -z "${TMUX}" ]; then
-	ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/github_rsa  | awk '{print $2}'` || ssh-add ~/.ssh/github_rsa &> /dev/null
-else
-	echo "Might have problems with ssh-agent (see .bashrc)"
-fi
+# This ssh-add actually sounds useless
+#if	[ -z "${TMUX}" ]; then
+#	ssh-add -l | grep -q `ssh-keygen -lf ~/.ssh/github_rsa  | awk '{print $2}'` || ssh-add ~/.ssh/github_rsa &> /dev/null
+#else
+#	echo "Might have problems with ssh-agent (see .bashrc)"
+#fi
 
 function j(){
     jobs | wc -l | egrep -v ^0 | sed -r 's/^([0-9]+)/ (\1)/'
@@ -146,8 +147,17 @@ __prompt_command() {
 	local Red='\e[0;31m'
 	local Gre='\e[0;32m'
 	local Blu='\e[1;34m'
+	local Ora='\[\e[1;38;5;215m\]'
+	local Mau='\[\e[1;38;5;147m\]'
 
-	PS1+="${Gre}\u@\h$(j)${RCol}: ${Red}\w${Blu}$(__git_ps1)"
+	# change hostname color if connection via ssh
+	if [[ $(pstree -s $$) = *sshd* ]]; then
+		PS1+="${Ora}"
+	else
+		PS1+="${Gre}"
+	fi
+
+	PS1+="\u@\h$(j)${RCol}: ${Red}\w${Blu}$(__git_ps1)"
 	if [ $EXIT != 0 ]; then
 		PS1+="$Red \342\234\226 (${EXIT})"
 	else
@@ -171,8 +181,26 @@ BASE16_SHELL="$HOME/.config/base16-shell/"
 # for pip
 export PATH=$PATH:$HOME/.local/bin
 
+# cargo
+export PATH=$PATH:$HOME/.cargo/bin
+
 # adb
 if [ -d "$HOME/Documents/lineageos_galaxytabs10.5/platform-tools" ]; then
 	export PATH=$PATH:"$HOME/Documents/lineageos_galaxytabs10.5/platform-tools"
 fi
 
+# Pomodoro timer
+# Usage: pomo 15 take a break
+function pomo() {
+    arg1=$1
+    shift
+    args="$*"
+
+    min=${arg1:?Example: pomo 15 Take a break}
+    sec=$((min * 60))
+    msg="${args:?Example: pomo 15 Take a break}"
+
+    while true; do
+        sleep "${sec:?}" && echo "${msg:?}" && notify-send -u critical -t 0 "${msg:?}"
+    done
+}

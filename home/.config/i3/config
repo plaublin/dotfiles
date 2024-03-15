@@ -217,6 +217,9 @@ for_window [title="^zoom$"] floating enable
 # Make skype floating
 for_window [title="skype"] floating enable
 
+# Make factorio floating
+for_window [class="factorio"] floating enable
+
 # take screenshots
 # 3 config file ~/.i3/config
 

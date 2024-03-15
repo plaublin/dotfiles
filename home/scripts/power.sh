@@ -3,7 +3,7 @@
 # choices will be displayed in dmenu
 choices="lock\nsuspend\nlogout\nreboot\nshutdown"
 
-# Your choice in dmenu will determine what xrandr command to run
+# Your choice in dmenu will determine what command to run
 #chosen=$(echo -e $choices | dmenu -i)
 chosen=$(echo -e $choices | rofi -dmenu)
 
