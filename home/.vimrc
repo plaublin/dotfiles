@@ -200,7 +200,6 @@ set completeopt=menuone,noinsert,noselect
 "" currently entered word is enough and the user wants to enter a new line.
 "inoremap <expr> <CR> pumvisible() ? "<C-o>o" : "<CR>"
 
-
 " Avoid showing extra messages when using completion
 set shortmess+=c
 
@@ -258,14 +257,15 @@ autocmd Filetype html,xml,xsl,php source ~/.vim/scripts/closetag.vim
 autocmd BufNewFile,BufRead *.c,*.cc,*.cpp,*.h,*.rs packadd termdebug
 
 " No arrow keys --- force yourself to use the home row
-nnoremap <up> <nop>
-nnoremap <down> <nop>
-noremap <left> gT
-noremap <right> gt
-inoremap <up> <nop>
-inoremap <down> <nop>
-inoremap <left> <nop>
-inoremap <right> <nop>
+" With a small keyboard (planck, ferris sweep) this is no longer needed
+" nnoremap <up> <nop>
+" nnoremap <down> <nop>
+" noremap <left> gT
+" noremap <right> gt
+" inoremap <up> <nop>
+" inoremap <down> <nop>
+" inoremap <left> <nop>
+" inoremap <right> <nop>
 
 " disable ctrl+q
 nnoremap <c-q> <nop>

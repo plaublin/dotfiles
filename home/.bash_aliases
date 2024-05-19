@@ -7,4 +7,5 @@ alias deletetempfiles='find . -name "*~" -delete'
 alias ssh='TERM=xterm-256color ssh -A'
 #alias chromium='$HOME/.ungoogled_chromium/ungoogled_chromium_90.0.4430.93-1.1.AppImage'
 #alias chrome='$HOME/.ungoogled_chromium/ungoogled_chromium_90.0.4430.93-1.1.AppImage'
+alias sudo='sudo ' # so that aliases work with sudo
 

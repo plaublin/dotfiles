@@ -25,6 +25,9 @@ if [ `xrandr | grep '^DP3-1' | grep -c ' connected '` -eq 1 ]; then
         EXTERNAL_DISPLAY="DP3-1"
 fi
 
+if [ `xrandr | grep '^DP3' | grep -c ' connected '` -eq 1 ]; then
+        EXTERNAL_DISPLAY="DP3"
+fi
 
 if [ "$EXTERNAL_DISPLAY" == "" ] && [ `xrandr | grep '^HDMI1' | grep -c ' connected '` -eq 1 ]; then
         EXTERNAL_DISPLAY="HDMI1"
